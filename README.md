@@ -1,27 +1,120 @@
 # MatTableDataFilter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.25.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.14.
 
-## Development server
+## Introduction
+This package is developed to get complex table data index on angular material project.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Getting started
 
-## Code scaffolding
+This package is based on `Angular Material 8/9`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+`npm install -g @angular/cli`
 
-## Build
+`ng new my-app`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+`ng add @angular/material`
 
-## Running unit tests
+`npm i mat-table-data-filter`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Setup
+Import in your app module ts.
 
-## Running end-to-end tests
+    app.module.ts
+    
+    import {MatTableDataFilterModule} from 'mat-table-data-filter/src/lib/mat-table-data-filter.module';
+    
+    @NgModule({
+        ...
+        imports: [
+            ...
+            MatTableDataFilterModule
+        ]
+        ...
+    })
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Example
 
-## Further help
+    On Component html file.
+    
+      <lib-mat-table-data-filter
+        [TableColumn]="tableColumn"
+        [SearchOption]="searchOption"
+        (getResult)="getResult($event)">
+      </lib-mat-table-data-filter>
+  
+    On Component Ts file.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+        Parameter Example
+    
+            tableColumn = [
+              { label: 'Company', definition: 'CompanyName', type: 'text', filter: 'true'},
+              { label: 'Title', definition: 'TitleId', type: 'select', filter: 'true', endpoint: 'api/controller/action'},
+              { label: 'Date Created', definition: 'CreatedOn', type: 'date', filter: 'true'},
+              { label: 'Some Field', definition: 'SomeField', type: 'text', filter: 'false'},
+              { label: 'Another Field', definition: 'AnotherField', type: 'bool', filter: 'true'},
+              { label: 'Actions', definition: 'actions', type: 'bool', filter: 'true'}
+            ];
+    
+            options = [
+              {
+                type: 'date',
+                values: ['equal', 'not equal', 'less than', 'less than or equal', 'greater than', 'greater than or equal'],
+                data: ['eq', 'ne', 'lt', 'le', 'gt', 'ge']
+              },
+              {
+                type: 'text',
+                values: ['equal', 'not equal', 'less than', 'less than or equal', 'greater than', 'greater than or equal',
+                  'begins with', 'does not begin with', 'ends with', 'does not end with', 'contains', 'does not contain',
+                  'is null', 'is not null'],
+                data: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn']
+              },
+              {
+                type: 'number',
+                values: ['equal', 'not equal', 'less than', 'less than or equal', 'greater than', 'greater than or equal'],
+                data: ['eq', 'ne', 'lt', 'le', 'gt', 'ge']
+              },
+              {
+                type: 'select',
+                values: ['equal', 'not equal'],
+                data: ['eq', 'ne']
+              },
+              {
+                type: 'bool',
+                values: ['equal', 'not equal'],
+                data: ['eq', 'ne']
+              }
+            ];
+    
+        Get Result
+    
+            getRestult(result) {
+                console.log(result);
+            }
+
+## Issue
+
+    angular.json file
+    
+        "project": {
+            ...
+            "project-name": {
+                ...
+                "build": {
+                    ...
+                    "preserveSymlinks": true,
+                    ...
+                }
+                ...
+            }
+            ...
+        }
+        
+
+    tsconfig.app.json
+    
+    "include": [
+        ...
+        "./node_modules/mat-table-data-filter/**/*.ts"
+    ]
+    

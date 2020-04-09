@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "mat-table-data-filter": [
+        "dist/mat-table-data-filter"
+      ],
+      "mat-table-data-filter/*": [
+        "dist/mat-table-data-filter/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
